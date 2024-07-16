@@ -1,10 +1,11 @@
 const express = require('express');
 const puppeteer = require('puppeteer');
+const path = require('path');
 
 const app = express();
-const port = process.env.PORT || 3000; // Use the PORT environment variable or default to 3000
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 const URL = "https://translate.google.com/?sl=auto&tl=en&op=translate";
 
@@ -56,8 +57,6 @@ async function translateText(inputText) {
   return translatedText;
 }
 
-
-
 app.post('/translate', async (req, res) => {
   const inputText = req.body.text || req.query.text || "Hello World";
   
@@ -82,10 +81,7 @@ app.get('/translate', async (req, res) => {
   }
 });
 
-app.get('/', (req, res) => {
-  res.send("Welcome to the Translate Server");
-});
-
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
