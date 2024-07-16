@@ -56,6 +56,8 @@ async function translateText(inputText) {
   return translatedText;
 }
 
+
+
 app.post('/translate', async (req, res) => {
   const inputText = req.body.text || req.query.text || "Hello World";
   
@@ -78,6 +80,10 @@ app.get('/translate', async (req, res) => {
     console.error("Error translating text:", error);
     res.status(500).json({ error: "Failed to translate text" });
   }
+});
+
+app.get('/', (req, res) => {
+  res.send("Welcome to the Translate Server");
 });
 
 app.listen(port, () => {
