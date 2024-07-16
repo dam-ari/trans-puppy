@@ -74,9 +74,9 @@ async function translateText(inputText) {
   }
 }
 
-app.post('/translate', async (req, res) => {
+app.post('/api/translate', async (req, res) => {
   const inputText = req.body.text || req.query.text || "Hello World";
-  
+
   try {
     const translatedText = await translateText(inputText);
     res.json({ original: inputText, translated: translatedText });
@@ -86,9 +86,9 @@ app.post('/translate', async (req, res) => {
   }
 });
 
-app.get('/translate', async (req, res) => {
+app.get('/api/translate', async (req, res) => {
   const inputText = req.query.text || "Hello World";
-  
+
   try {
     const translatedText = await translateText(inputText);
     res.json({ original: inputText, translated: translatedText });
